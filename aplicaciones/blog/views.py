@@ -1,20 +1,37 @@
 from django.shortcuts import render
+from .models import Post, Categoria
 
 # Create your views here.
 def home(request):
-    return render(request, 'index.html')
+    posts = Post.objects.filter(estado = True)
+    return render(request, 'index.html',{'posts':posts})
 
 def generales(request):
-    return render(request, 'generales.html')
-
-def programacion(request):
-    return render(request, 'programacion.html')
-
-def videojuegos(request):
-    return render(request, 'videojuegos.html')
+    posts = Post.objects.filter(
+        estado = True,
+        categoria = Categoria.objects.get(nombre = 'Generales'))
+    return render(request, 'generales.html', {'posts':posts})
 
 def tutoriales(request):
-    return render(request, 'tutoriales.html')
+    posts = Post.objects.filter(
+        estado = True,
+        categoria = Categoria.objects.get(nombre = 'Tutoriales'))
+    return render(request, 'tutoriales.html',{'posts':posts})
 
 def tecnologia(request):
-    return render(request, 'tecnologia.html')
+    posts = Post.objects.filter(
+        estado = True,
+        categoria = Categoria.objects.get(nombre = 'Tecnologia'))
+    return render(request, 'tecnologia.html',{'posts':posts})
+
+def programacion(request):
+    posts = Post.objects.filter(
+        estado = True,
+        categoria = Categoria.objects.get(nombre = 'Programacion'))
+    return render(request, 'programacion.html',{'posts':posts})    
+
+def videojuegos(request):
+    posts = Post.objects.filter(
+        estado = True,
+        categoria = Categoria.objects.get(nombre = 'Video Juegos'))
+    return render(request, 'videojuegos.html',{'posts':posts})    
