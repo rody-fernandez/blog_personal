@@ -35,3 +35,10 @@ def videojuegos(request):
         estado = True,
         categoria = Categoria.objects.get(nombre = 'Video Juegos'))
     return render(request, 'videojuegos.html',{'posts':posts})    
+
+def detallePost(request, slug):
+    post = Post.objects.get(
+        slug = slug
+    )
+    print(post)
+    return render(request, 'post.html',{'detalle_post':post})
